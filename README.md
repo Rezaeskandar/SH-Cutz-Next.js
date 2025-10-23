@@ -1,366 +1,180 @@
-# SH-Cutz Barbershop - Bokningswebbplats
+# Noori's Barber - Booking Website
 
-En modern och professionell webbplats för SH-Cutz Barbershop med integrerat bokningssystem, adminpanel och automatisk e-postbekräftelse.
+A modern and professional website for Noori's Barber, featuring an integrated booking system, admin panel, and automated email confirmations.
 
-![SH-Cutz](https://img.shields.io/badge/Next.js-15.5.4-black?style=flat&logo=next.js)
-![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat&logo=tailwind-css)
+!Next.js
+!React
+!TypeScript
+!Tailwind CSS
 
-## 📋 Innehållsförteckning
+## 📋 Table of Contents
 
-- [Översikt](#översikt)
-- [Funktioner](#funktioner)
-- [Tech Stack](#tech-stack)
-- [Projektstruktur](#projektstruktur)
-- [Kom igång](#kom-igång)
-- [API-dokumentation](#api-dokumentation)
-- [Miljövariabler](#miljövariabler)
-- [Sidor](#sidor)
-- [Deployment](#deployment)
+- Overview
+- Features
+- Tech Stack
+- Project Structure
+- Getting Started
+- API Documentation
+- Environment Variables
+- Deployment
 
-## 🎯 Översikt
+## 🎯 Overview
 
-SH-Cutz är en fullständig webbapplikation för en barbershop som inkluderar:
-- Responsiv webbplats med moderna designprinciper
-- Fullt fungerande bokningssystem
-- Automatisk e-postbekräftelse till kunder
-- E-postnotifiering till salongen vid nya bokningar
-- Adminpanel för att hantera bokningar
-- Filbaserad datalagring för bokningar
+This is a full-stack web application for a modern barbershop, which includes:
+- A responsive website with a clean, modern design and dark/light mode support.
+- A fully functional online booking system.
+- Automated email confirmations for customers.
+- Email notifications to the salon for new bookings and contact form submissions.
+- A secure admin panel to view and manage bookings.
 
-## ✨ Funktioner
+## ✨ Features
 
-### För Kunder
-- 🏠 **Hemsida** - Presenterar salongen, tjänster, galleri och kundrecensioner
-- 📅 **Online Bokning** - Enkelt bokningssystem med datumväljare
-- ✉️ **E-postbekräftelse** - Automatisk bekräftelse skickas till kunden
-- 💈 **Tjänstöversikt** - Detaljerad information om alla tjänster
-- 📞 **Kontaktinformation** - Öppettider, adress och kontaktuppgifter
+### For Customers
+- 🏠 **Homepage:** An elegant landing page showcasing the salon, a dynamic list of services, a gallery, and testimonials.
+- 📅 **Online Booking:** An interactive booking form with a date picker, time slot selection, and barber selection.
+- ✉️ **Email Confirmation:** Customers receive an automatic email receipt upon booking.
+- 💈 **Services Page:** A detailed overview of all services, neatly organized by category.
+- 📞 **Contact Page:** Displays opening hours, address, a map, and a functional contact form.
 
-### För Administratörer
-- 🔐 **Adminpanel** - Säker sida för att hantera bokningar
-- ✅ **Statushantering** - Markera bokningar som hanterade/ohanterade
-- 📊 **Bokningsöversikt** - Se alla bokningar med detaljerad information
-- 🔄 **Realtidsuppdatering** - Bokningar uppdateras direkt i systemet
+### For Administrators
+- 🔐 **Admin Panel:** A password-protected page to manage all incoming bookings.
+- ✅ **Status Management:** Mark bookings as "handled" or "unhandled" to keep track of the schedule.
+- 📊 **Booking Overview:** View all booking details, including customer information, chosen service, and any special notes.
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Next.js 15.5.4** - React-ramverk med App Router
-- **React 19.1.0** - Användargränssnittsbibliotek
-- **TypeScript 5** - Typsäkert JavaScript
-- **Tailwind CSS 4** - Utility-first CSS-ramverk
+- **Next.js** - React framework with App Router.
+- **React** - UI library for building user interfaces.
+- **TypeScript** - For type-safe JavaScript.
+- **Tailwind CSS** - A utility-first CSS framework for rapid UI development.
+- **react-day-picker** - A flexible and customizable date picker component.
+- **date-fns** - For modern date/time manipulation.
 
 ### Backend & API
-- **Next.js API Routes** - Serverless API-endpoints
-- **Nodemailer 7.0.9** - E-posthantering via SMTP
-- **File System (fs)** - Datalagring i JSON-fil
+- **Next.js API Routes** - For creating serverless API endpoints.
+- **Nodemailer** - For sending emails via an SMTP server (e.g., Gmail).
 
-### Development Tools
-- **Turbopack** - Snabb bundler för utveckling
-- **ESLint** - Code linting
-- **PostCSS** - CSS-transformation
-
-## 📁 Projektstruktur
+## 📁 Project Structure
 
 ```
-sh-cutz-booking/
-├── app/                      # Next.js App Router
-│   ├── page.tsx             # Hemsida
-│   ├── layout.tsx           # Root layout
-│   ├── globals.css          # Globala CSS-stilar
+nooris-barber/
+├── app/
+│   ├── page.tsx              # Homepage
+│   ├── layout.tsx            # Root Layout
+│   ├── globals.css           # Global Styles
 │   ├── admin/
-│   │   └── page.tsx         # Adminpanel för bokningshantering
+│   │   └── page.tsx          # Admin Panel
 │   ├── api/
-│   │   ├── bookings/
-│   │   │   └── route.ts     # GET & PATCH för bokningar
-│   │   └── send/
-│   │       └── route.ts     # POST för att skapa bokning & skicka e-post
+│   │   ├── admin/login/route.ts # Admin login logic
+│   │   ├── bookings/route.ts # GET & PATCH for bookings
+│   │   ├── contact/route.ts  # POST for contact form
+│   │   └── send/route.ts     # POST for creating bookings & sending emails
 │   ├── boking/
-│   │   └── page.tsx         # Bokningssida med formulär
+│   │   └── page.tsx          # Booking Page
 │   ├── contact/
-│   │   └── page.tsx         # Kontaktsida
+│   │   └── page.tsx          # Contact Page
 │   └── services/
-│       └── page.tsx         # Tjänstesida
-├── components/              # React-komponenter
-│   ├── BookningForm.tsx     # Bokningsformulär
-│   ├── Footer.tsx           # Sidfot
-│   └── Navbar.tsx           # Navigeringsmeny
+│       └── page.tsx          # Services Page
+├── components/
+│   ├── BookningForm.tsx      # Booking Form Component
+│   ├── Footer.tsx            # Footer Component
+│   ├── Navbar.tsx            # Navbar Component
+│   └── ThemeToggle.tsx       # Dark/Light mode toggle
 ├── data/
-│   └── bookings.json        # Datalagring för bokningar
-├── public/                  # Statiska filer
-│   └── images/              # Bilder för webbplatsen
-├── .env.local              # Miljövariabler (ej i git)
-├── package.json            # NPM-dependencies
-├── tsconfig.json           # TypeScript-konfiguration
-├── tailwind.config.js      # Tailwind CSS-konfiguration
-└── next.config.ts          # Next.js-konfiguration
+│   ├── availability.ts       # Defines working hours and breaks
+│   ├── bookings.json         # Local database for bookings (for development)
+│   └── services.ts           # Central list of all services
+├── public/
+│   ├── images/               # Site images (hero, gallery)
+│   └── logo.png              # Site logo
+├── .env.local                # Environment variables (not committed to git)
+├── package.json
+└── tsconfig.json
 ```
 
-## 🚀 Kom igång
+## 🚀 Getting Started
 
-### Förutsättningar
+### Prerequisites
 
-Se till att du har följande installerat:
-- **Node.js** 20.x eller senare
-- **npm** eller annan pakethanterare (yarn, pnpm, bun)
+Make sure you have the following installed:
+- **Node.js** v20.x or later
+- **npm**, **yarn**, or **pnpm**
 
 ### Installation
 
-1. **Klona projektet**
-```bash
-git clone <repository-url>
-cd sh-cutz-booking
-```
+1.  **Clone the repository**
+    ```bash
+    git clone <repository-url>
+    cd nooris-barber-next-js
+    ```
 
-2. **Installera dependencies**
-```bash
-npm install
-```
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-3. **Skapa miljövariabler**
+3.  **Set up environment variables**
 
-Skapa en `.env.local`-fil i projektets rotmapp:
-```env
-SMTP_USER=din-email@gmail.com
-SMTP_PASS=ditt-app-lösenord
-```
+    Create a `.env.local` file in the project root and add the following variables.
 
-> **OBS!** För Gmail måste du använda ett App-specifikt lösenord. Gå till Google Account Settings → Security → 2-Step Verification → App passwords
+    ```env
+    # For sending emails via Gmail
+    SMTP_USER=your-email@gmail.com
+    SMTP_PASS=your-gmail-app-password
 
-4. **Skapa datamapp**
-```bash
-mkdir data
-echo "[]" > data/bookings.json
-```
+    # For logging into the /admin page
+    ADMIN_PASSWORD=your-secret-admin-password
+    ```
 
-5. **Starta utvecklingsservern**
-```bash
-npm run dev
-```
+    > **Note:** For Gmail, you must use an **App Password**. Go to Google Account Settings → Security → 2-Step Verification → App passwords to generate one.
 
-Öppna [http://localhost:3000](http://localhost:3000) i din webbläsare.
+4.  **Start the development server**
+    ```bash
+    npm run dev
+    ```
 
-### Build för produktion
+    Open http://localhost:3000 in your browser.
 
-```bash
-npm run build
-npm start
-```
+## 📡 API Documentation
 
-## 📡 API-dokumentation
+### `POST /api/send`
 
-### POST `/api/send`
+Handles new bookings. It sends an email notification to the salon and a confirmation email to the customer.
 
-Skapar en ny bokning och skickar e-post till både kund och salong.
+### `POST /api/contact`
 
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "0701234567",
-  "service": "Haircut",
-  "date": "2025-10-20",
-  "time": "14:00",
-  "message": "Vill ha kort på sidorna"
-}
-```
+Handles contact form submissions. It sends the message to the salon's email and a confirmation to the sender.
 
-**Response:**
-```json
-{
-  "success": true
-}
-```
+### `POST /api/admin/login`
 
-**Funktioner:**
-- Sparar bokningen i `data/bookings.json`
-- Skickar bekräftelse till kunden
-- Skickar notifiering till salongen
-- Genererar unikt ID baserat på timestamp
+Securely handles admin login by verifying the password on the server side.
 
-### GET `/api/bookings`
+### `GET /api/bookings`
 
-Hämtar alla bokningar från systemet.
+*For local development only.* Fetches all bookings from `data/bookings.json`.
 
-**Response:**
-```json
-[
-  {
-    "id": 1729081234567,
-    "name": "John Doe",
-    "email": "john@example.com",
-    "phone": "0701234567",
-    "service": "Haircut",
-    "date": "2025-10-20",
-    "time": "14:00",
-    "message": "Vill ha kort på sidorna",
-    "created": "2025-10-16T10:55:36.000Z",
-    "handled": false
-  }
-]
-```
+### `PATCH /api/bookings`
 
-### PATCH `/api/bookings`
+*For local development only.* Updates a booking's `handled` status in `data/bookings.json`.
 
-Uppdaterar status på en bokning (markera som hanterad/ohanterad).
+## 🔐 Environment Variables
 
-**Request Body:**
-```json
-{
-  "id": 1729081234567,
-  "handled": true
-}
-```
+Create a `.env.local` file with the following:
 
-**Response:**
-```json
-{
-  "success": true
-}
-```
-
-## 🔐 Miljövariabler
-
-Skapa en `.env.local`-fil med följande variabler:
-
-| Variabel | Beskrivning | Exempel |
-|----------|-------------|---------|
-| `SMTP_USER` | E-postadress för SMTP-server | `info@sh-cutz.se` |
-| `SMTP_PASS` | Lösenord/App-lösenord för e-post | `abcd efgh ijkl mnop` |
-
-### Konfigurera Gmail SMTP
-
-1. Aktivera 2-stegsverifiering på ditt Google-konto
-2. Gå till [Google App Passwords](https://myaccount.google.com/apppasswords)
-3. Skapa ett nytt app-lösenord för "Mail"
-4. Använd det genererade lösenordet i `SMTP_PASS`
-
-## 📄 Sidor
-
-### `/` - Hemsida
-- Hero-sektion med call-to-action
-- Om-sektion med information om salongen
-- Tjänstöversikt med priser
-- Galleri med bilder
-- Kundrecensioner
-- Kontaktinformation i footer
-
-### `/boking` - Bokningssida
-- Interaktivt bokningsformulär
-- Datumväljare för bokningsdatum
-- Tjänstval med dropdown
-- Validering av alla fält
-- Bekräftelsemeddelande efter lyckad bokning
-
-### `/services` - Tjänster
-- Detaljerad lista över alla tjänster
-- Priser och tidsuppskattningar
-- Beskrivningar av varje tjänst
-
-### `/contact` - Kontakt
-- Kontaktinformation
-- Öppettider
-- Karta/adress
-- Kontaktformulär (om implementerat)
-
-### `/admin` - Adminpanel
-- Översikt över alla bokningar
-- Sortering efter status (hanterad/ohanterad)
-- Möjlighet att markera bokningar som hanterade
-- Visar kundinformation och bokningsdetaljer
-
-## 🎨 Anpassning
-
-### Färgschema
-
-Projektet använder ett anpassat färgschema definierat i Tailwind CSS:
-- **Charcoal** (`#1a1a1a`) - Primär bakgrundsfärg
-- **Gold** (`#d4af37`) - Accentfärg
-- **Cream** (`#f5f5dc`) - Textfärg
-
-### Tjänster
-
-För att uppdatera tjänster, redigera:
-- `app/page.tsx` - Hemsidans tjänstsektion
-- `app/services/page.tsx` - Tjänstesidan
-- `components/BookningForm.tsx` - Dropdown med tjänster
-
-### Bilder
-
-Placera bilder i `public/images/`:
-- `barbershop-hero.jpg` - Hero-bild
-- `gallery1.jpg` till `gallery6.jpg` - Galleribilder
-- Ikoner för tjänster
+| Variable | Description | Example |
+| :--- | :--- | :--- |
+| `SMTP_USER` | The email address used for the SMTP server. | `info@noorisbarber.se` |
+| `SMTP_PASS` | The app-specific password for the email account. | `abcd efgh ijkl mnop` |
+| `ADMIN_PASSWORD`| The password to access the `/admin` page. | `supersecret` |
 
 ## 🚢 Deployment
 
-### Vercel (Rekommenderat)
+This project is optimized for deployment on **Vercel**.
 
-1. Pusha koden till GitHub
-2. Importera projektet på [Vercel](https://vercel.com)
-3. Lägg till miljövariabler i Vercel Dashboard
-4. Deploy!
+1.  **Push your code** to a GitHub, GitLab, or Bitbucket repository.
+2.  **Import the project** on your Vercel Dashboard.
+3.  **Configure Environment Variables:** Go to your project's **Settings → Environment Variables** on Vercel and add the `SMTP_USER`, `SMTP_PASS`, and `ADMIN_PASSWORD` variables.
+4.  **Deploy!** Vercel will automatically build and deploy your site.
 
-### Andra plattformar
-
-Projektet kan också deployas på:
-- Netlify
-- Railway
-- Render
-- Egen VPS
-
-**OBS!** Se till att:
-- Sätta miljövariabler
-- Skapa `data`-mappen med `bookings.json`
-- Konfigurera build-kommandon korrekt
-
-## 📝 Utveckling
-
-### Tillgängliga Scripts
-
-```bash
-# Starta utvecklingsserver med Turbopack
-npm run dev
-
-# Bygg för produktion
-npm run build
-
-# Starta produktionsserver
-npm start
-
-# Kör linting
-npm run lint
-```
-
-### Lägga till nya funktioner
-
-1. **Ny sida:** Skapa en ny mapp i `app/` med en `page.tsx`
-2. **Ny komponent:** Lägg till i `components/`
-3. **Nytt API:** Skapa `route.ts` i `app/api/`
-
-## 🤝 Bidra
-
-Om du vill bidra till projektet:
-1. Forka projektet
-2. Skapa en feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commita dina ändringar (`git commit -m 'Add some AmazingFeature'`)
-4. Pusha till branchen (`git push origin feature/AmazingFeature`)
-5. Öppna en Pull Request
-
-## 📞 Support
-
-För frågor och support, kontakta:
-- **E-post:** info@sh-cutz.se
-- **Telefon:** 070-123 45 67
-- **Adress:** Centralvägen 1, 194 76 Upplands Väsby
-
-## 📜 Licens
-
-© 2025 SH-Cutz. Alla rättigheter förbehållna.
-
----
-
-**Byggt med ❤️ av SH-Cutz Team**
+> **Important:** The feature to save bookings to a JSON file will **not** work on Vercel due to its read-only file system. The application is configured to handle this gracefully by relying on email notifications for booking management. The admin panel will not display bookings in a production environment. For a full-featured admin panel, a database (e.g., Vercel Postgres) is required.
