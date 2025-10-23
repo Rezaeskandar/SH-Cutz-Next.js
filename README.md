@@ -11,7 +11,7 @@ A modern and professional website for Noori's Barber, featuring an integrated bo
 
 - Overview
 - Features
-- Tech Stack
+- Tech Stack & Dependencies
 - Project Structure
 - Getting Started
 - API Documentation
@@ -41,19 +41,20 @@ This is a full-stack web application for a modern barbershop, which includes:
 - ✅ **Status Management:** Mark bookings as "handled" or "unhandled" to keep track of the schedule.
 - 📊 **Booking Overview:** View all booking details, including customer information, chosen service, and any special notes.
 
-## 🛠 Tech Stack
+## 🛠 Tech Stack & Dependencies
 
-### Frontend
-- **Next.js** - React framework with App Router.
-- **React** - UI library for building user interfaces.
-- **TypeScript** - For type-safe JavaScript.
-- **Tailwind CSS** - A utility-first CSS framework for rapid UI development.
-- **react-day-picker** - A flexible and customizable date picker component.
-- **date-fns** - For modern date/time manipulation.
+### Frameworks & Libraries
+- **Next.js:** React framework with App Router.
+- **React:** UI library for building user interfaces.
+- **TypeScript:** For type-safe JavaScript.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
 
-### Backend & API
-- **Next.js API Routes** - For creating serverless API endpoints.
-- **Nodemailer** - For sending emails via an SMTP server (e.g., Gmail).
+### Key Dependencies
+- **Nodemailer:** For sending emails via an SMTP server (e.g., Gmail) for booking and contact confirmations.
+- **react-day-picker:** A flexible and customizable date picker component for the booking form.
+- **date-fns:** For modern and reliable date/time manipulation.
+
+All dependencies are listed in `package.json` and installed by running `npm install`.
 
 ## 📁 Project Structure
 
@@ -164,9 +165,9 @@ Create a `.env.local` file with the following:
 
 | Variable | Description | Example |
 | :--- | :--- | :--- |
-| `SMTP_USER` | The email address used for the SMTP server. | `xxxxxxxxx` |
-| `SMTP_PASS` | The app-specific password for the email account. | `xxxxxx` |
-| `ADMIN_PASSWORD`| The password to access the `/admin` page. | `xxxxxxxxx` |
+| `SMTP_USER` | The email address used for the SMTP server. | `xxxxxxxxxxxx` |
+| `SMTP_PASS` | The app-specific password for the email account. | `xxxxxxxxxxxx` |
+| `ADMIN_PASSWORD`| The password to access the `/admin` page. | `xxxxxxxxxxxx` |
 
 ## 🚢 Deployment
 
