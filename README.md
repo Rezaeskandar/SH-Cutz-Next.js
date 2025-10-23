@@ -164,9 +164,9 @@ Create a `.env.local` file with the following:
 
 | Variable | Description | Example |
 | :--- | :--- | :--- |
-| `SMTP_USER` | The email address used for the SMTP server. | `info@noorisbarber.se` |
-| `SMTP_PASS` | The app-specific password for the email account. | `abcd efgh ijkl mnop` |
-| `ADMIN_PASSWORD`| The password to access the `/admin` page. | `supersecret` |
+| `SMTP_USER` | The email address used for the SMTP server. | `xxxxxxxxx` |
+| `SMTP_PASS` | The app-specific password for the email account. | `xxxxxx` |
+| `ADMIN_PASSWORD`| The password to access the `/admin` page. | `xxxxxxxxx` |
 
 ## 🚢 Deployment
 
